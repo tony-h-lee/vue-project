@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import HackerNews from '@/components/HackerNews.vue';
+import HackerNews from '@/components/HackerNews/HackerNews.vue';
 
 export default {
   name: 'HackerNewsPage',

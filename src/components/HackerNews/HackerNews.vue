@@ -1,11 +1,16 @@
 <template>
   <div>
     <div v-if="hackerNews.data">
-      <div class="feedItem" v-for="feedItem in hackerNews.data">
-        <h3> {{ feedItem.title }} </h3>
-        <p> By {{ feedItem.user }} </p>
-        <p> Published {{ moment.unix(feedItem.time).format('MMMM Do YYYY') }}</p>
-      </div>
+      <router-link
+              v-for="feedItem in hackerNews.data"
+              :to="`/news/${feedItem.id}`"
+      >
+        <div class="feedItem" >
+          <h3> {{ feedItem.title }} </h3>
+          <p> By {{ feedItem.user }} </p>
+          <p> Published {{ moment.unix(feedItem.time).format('MMMM Do YYYY') }}</p>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -37,6 +42,9 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  a{
+    text-decoration: none;
+  }
   .feedItem {
     position: relative;
     padding: 1rem 2rem;
@@ -51,6 +59,7 @@ export default {
   }
   h3 {
     margin: 1rem 0;
+    color: #333;
   }
   p {
     font-size: 0.9rem;
