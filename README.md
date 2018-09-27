@@ -1,4 +1,6 @@
-# verda-vue-project
+# Vue Project
+Vue Project with Hacker News and Cats
+
 
 ## Project setup
 ```
