@@ -22,6 +22,11 @@ export default new Router({
       path: '/news/:id',
       name: 'NewsItemPage',
       component: () => import(/* webpackChunkName: "NewsItem" */ './views/NewsItemPage.vue')
+    },
+    {
+      path: '/cats',
+        name: 'CatsPage',
+      component: () => import(/* webpackChunkName: "NewsItem" */ './views/CatsPage.vue')
     }
   ]
 })

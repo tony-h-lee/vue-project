@@ -15,7 +15,7 @@
         <h3> Comments </h3>
         <div class="comment" v-for="comment in newsItem.data.comments">
           <h5> {{ comment.user }} said:</h5>
-          <div v-html="comment.content" />
+          <div v-html="cleanHTML(comment.content)" />
         </div>
       </div>
       <div class="json">
@@ -28,12 +28,14 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
+import sanitizeHtml from 'sanitize-html';
 import moment from 'moment';
 export default {
   name: 'NewsItem',
   data () {
     return {
       moment,
+      sanitizeHtml,
     }
   },
   mounted() {
@@ -47,7 +49,10 @@ export default {
   methods: {
     ...mapActions([
       'getNewsItem'
-    ])
+    ]),
+    cleanHTML: (html) => (
+      sanitizeHtml(html)
+    )
   }
 }
 </script>
