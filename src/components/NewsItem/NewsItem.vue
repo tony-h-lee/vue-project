@@ -1,6 +1,28 @@
 <template>
   <div>
-    {{ $route.params.id }}
+    <div v-if="newsItem.loading">
+      Loading
+    </div>
+    <div v-else-if="newsItem.error">
+      {{ newsItem.error }}
+    </div>
+    <div v-else class="article">
+      <h2> {{ newsItem.data.title }} </h2>
+      <p> By {{ newsItem.data.user }} </p>
+      <p> Published {{ moment.unix(newsItem.data.time).format('MMMM Do YYYY') }}</p>
+      <p> {{ newsItem.data.points }} Points </p>
+      <div class="comments-wrapper">
+        <h3> Comments </h3>
+        <div class="comment" v-for="comment in newsItem.data.comments">
+          <h5> {{ comment.user }} said:</h5>
+          <div v-html="comment.content" />
+        </div>
+      </div>
+      <div class="json">
+        <h5> Raw JSON </h5>
+        {{ JSON.stringify(newsItem.data) }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,31 +53,30 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  a{
-    text-decoration: none;
+  .article {
+    padding: 0.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
   }
-  .feedItem {
-    position: relative;
-    padding: 1rem 2rem;
-    background: #fff;
-    border: 1px solid #ededed;
-    box-shadow: 1px 1px 3px #eee;
-  }
-  .feedItem:hover, .feedItem:active {
-    transition: 0.1s;
-    top: -2px;
-    box-shadow: 1px 1px 5px #bbb;
-  }
-  h3 {
-    margin: 1rem 0;
-    color: #333;
+  h2 {
+    margin-bottom: 0.7rem;
   }
   p {
-    font-size: 0.9rem;
-    color: #888;
-    margin: 0 0 0.3rem 0;
+    margin: 0 0 0.5rem 0;
   }
-  p:last-child {
-    margin-bottom: 1rem;
+  .json {
+    border: 1px solid #ddd;
+    padding: 0 2rem 2rem 2rem;
+    margin: 2rem 0;
+    background: #f5f5f5;
+  }
+  .comment {
+    text-align: left;
+    margin-bottom: 3rem;
+  }
+  .comments h5 {
+    margin-bottom: 0.1rem;
   }
 </style>

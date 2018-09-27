@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-if="hackerNews.data">
+    <div v-if="hackerNews.loading">
+      Loading
+    </div>
+    <div v-else-if="hackerNews.data">
       <router-link
               v-for="feedItem in hackerNews.data"
               :to="`/news/${feedItem.id}`"
@@ -11,6 +14,9 @@
           <p> Published {{ moment.unix(feedItem.time).format('MMMM Do YYYY') }}</p>
         </div>
       </router-link>
+    </div>
+    <div v-else-if="hackerNews.error">
+      {{ hackerNews.error }}
     </div>
   </div>
 </template>
