@@ -4,12 +4,12 @@ export default {
     hackerNews.error = false;
   },
   GET_NEWS_SUCCESS: ({ hackerNews }, data) => {
-    hackerNews.loading = true;
+    hackerNews.loading = false;
     hackerNews.error = false;
     hackerNews.data = data;
   },
   GET_NEWS_ERROR: ({ hackerNews }, error) => {
-    hackerNews.loading = true;
+    hackerNews.loading = false;
     hackerNews.error = error;
   },
 };

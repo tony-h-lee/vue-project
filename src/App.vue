@@ -17,11 +17,11 @@ html, body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
   min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
+  background: #fafafa;
 }
 #nav {
   padding: 1rem;
@@ -38,6 +38,15 @@ html, body {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.full-center {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .page-wrapper {
   flex: 1;
 }

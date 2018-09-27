@@ -1,12 +1,11 @@
+import axios from 'axios';
+
 export default {
   getNews: ({ commit }) => {
     commit('GET_NEWS_REQUEST');
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve();
-      }, 500)
-    })
-      .then(() => commit('GET_NEWS_SUCCESS', { msg: 'hello' }))
-      .catch(() => commit('GET_NEWS_ERROR'));
+    return axios
+      .get('https://api.hnpwa.com/v0/news/1.json')
+      .then((response) => commit('GET_NEWS_SUCCESS', response.data))
+      .catch((error) => commit('GET_NEWS_ERROR', error));
   },
 };

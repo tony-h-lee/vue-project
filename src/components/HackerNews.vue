@@ -1,13 +1,25 @@
 <template>
   <div>
-    Hacker News
+    <div v-if="hackerNews.data">
+      <div class="feedItem" v-for="feedItem in hackerNews.data">
+        <h3> {{ feedItem.title }} </h3>
+        <p> By {{ feedItem.user }} </p>
+        <p> Published {{ moment.unix(feedItem.time).format('MMMM Do YYYY') }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex';
+import moment from 'moment';
 export default {
   name: 'HackerNews',
+  data () {
+    return {
+      moment,
+    }
+  },
   mounted() {
     this.getNews()
   },
@@ -25,27 +37,27 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-button {
-  padding: 10px;
-  margin-top: 30px;
-  width: 100%;
-  background: none;
-  border: 1px solid lightgray;
-  outline: 0;
-  cursor: pointer;
-}
+  .feedItem {
+    position: relative;
+    padding: 1rem 2rem;
+    background: #fff;
+    border: 1px solid #ededed;
+    box-shadow: 1px 1px 3px #eee;
+  }
+  .feedItem:hover, .feedItem:active {
+    transition: 0.1s;
+    top: -2px;
+    box-shadow: 1px 1px 5px #bbb;
+  }
+  h3 {
+    margin: 1rem 0;
+  }
+  p {
+    font-size: 0.9rem;
+    color: #888;
+    margin: 0 0 0.3rem 0;
+  }
+  p:last-child {
+    margin-bottom: 1rem;
+  }
 </style>
